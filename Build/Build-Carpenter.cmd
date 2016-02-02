@@ -1,0 +1,28 @@
+@ECHO OFF
+SETLOCAL ENABLEDELAYEDEXPANSION ENABLEEXTENSIONS
+SET "STARTINGDIRECTORY=%cd%\"
+SET BUILDDIRECTORY=%~dp0
+
+PUSHD %BUILDDIRECTORY%
+
+:: List the build properties
+CALL :RunScript ListBuildProperties.cmd
+
+:: Build solution
+CALL :RunScript BuildSolution.cmd
+
+POPD
+
+ENDLOCAL
+GOTO:EOF
+
+:RunScript
+ECHO.
+ECHO.
+ECHO (Scripts\%~1)
+ECHO.
+CALL Scripts\%~1
+GOTO:EOF
+
+:Usage
+GOTO:EOF

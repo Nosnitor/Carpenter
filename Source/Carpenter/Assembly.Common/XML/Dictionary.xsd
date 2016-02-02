@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:element name="Dictionary">
+		<xs:annotation>
+			<xs:documentation>Visual Studio dictionary file</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Words" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+              <xs:element name="Unrecognized" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Word" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+							<xs:element name="Recognized" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Word" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+              <xs:element name="Deprecated" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Term" type="DeprecatedTermElement" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Compound" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Term" type="CompoundTermElement" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="DiscreteExceptions" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Term" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+					</xs:complexType>
+				</xs:element>
+        <xs:element name="Acronyms" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CasingExceptions" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Acronym" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+  <xs:complexType name="DeprecatedTermElement">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="PreferredAlternate" type="xs:string">
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CompoundTermElement">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="CompoundAlternate" type="xs:string">
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

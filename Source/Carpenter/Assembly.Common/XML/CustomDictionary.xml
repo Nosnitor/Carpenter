@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dictionary xmlns:xsi="http://schemas.nosnitor.com/2014/07/Dictionary" xmlns:n1="http://www.w3.org/2001/XMLSchema-instance" n1:noNamespaceSchemaLocation="Dictionary.xsd">
+	<Words>
+		<Recognized>
+			<Word>Nosnitor</Word>
+		</Recognized>
+	</Words>
+</Dictionary>

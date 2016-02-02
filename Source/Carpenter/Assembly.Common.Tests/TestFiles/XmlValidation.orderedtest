@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="xmlvalidation" storage="e:\dev\carpenter\source\carpenter\assembly.common.tests\testfiles\xmlvalidation.orderedtest" id="47e50721-b2ec-4c8f-84da-68016aba720b" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="8869c519-d277-4733-b0d7-499b1a6684b0" name="GetEnvironmentVariables" storage="getenvironmentvariables.generictest" type="Microsoft.VisualStudio.TestTools.TestTypes.Generic.GenericTest, Microsoft.VisualStudio.QualityTools.Tips.GenericTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="12ecb486-ab80-480f-8388-ea585e9544d1" name="GetDirectoryUnderCurrent" storage="getdirectoryundercurrent.generictest" type="Microsoft.VisualStudio.TestTools.TestTypes.Generic.GenericTest, Microsoft.VisualStudio.QualityTools.Tips.GenericTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="de24a4b0-389f-4a74-9bea-6edc357607d6" name="341-ValidateDictionaryXsd" storage="341-validatedictionaryxsd.generictest" type="Microsoft.VisualStudio.TestTools.TestTypes.Generic.GenericTest, Microsoft.VisualStudio.QualityTools.Tips.GenericTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="d0dc2d8c-3f76-4dd1-ad29-cc5c65d784fd" name="339-ValidateCustomDictionaryXml" storage="339-validatecustomdictionaryxml.generictest" type="Microsoft.VisualStudio.TestTools.TestTypes.Generic.GenericTest, Microsoft.VisualStudio.QualityTools.Tips.GenericTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

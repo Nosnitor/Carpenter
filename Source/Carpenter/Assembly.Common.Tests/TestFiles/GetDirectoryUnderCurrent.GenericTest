@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GenericTest name="GetDirectoryUnderCurrent" storage="e:\dev\carpenter\source\carpenter\assembly.common.tests\testfiles\getdirectoryundercurrent.generictest" id="12ecb486-ab80-480f-8388-ea585e9544d1" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Command filename="%COMSPEC%" arguments="/c DIR /s" workingDirectory="%TestOutputDirectory%" />
+  <SummaryXmlFile path="%TestOutputDirectory%\&lt;Enter summary file name here&gt;" />
+</GenericTest>

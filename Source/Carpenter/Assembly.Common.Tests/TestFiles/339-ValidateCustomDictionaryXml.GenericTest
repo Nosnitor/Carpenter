@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GenericTest name="339-ValidateCustomDictionaryXml" storage="e:\dev\carpenter\source\carpenter\assembly.common.tests\testfiles\339-validatecustomdictionaryxml.generictest" id="d0dc2d8c-3f76-4dd1-ad29-cc5c65d784fd" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <DeploymentItems>
+    <DeploymentItem filename="Assembly.Common.Tests\TestFiles\Invoke-XmlSchemaValidation.ps1" />
+  </DeploymentItems>
+  <Command filename="%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" arguments="-NonInteractive -Command &quot;&amp;{ ..\..\..\Out\Invoke-XmlSchemaValidation.ps1 -SchemaDefinition %CarpenterMain%\Source\Carpenter\Assembly.Common\XML\Dictionary.xsd -XmlFile %CarpenterMain%\Source\Carpenter\Assembly.Common\XML\CustomDictionary.xml; exit $LastExitCode }&quot;" workingDirectory="%TestOutputDirectory%" />
+  <SummaryXmlFile path="%TestOutputDirectory%\&lt;Enter summary file name here&gt;" />
+</GenericTest>
