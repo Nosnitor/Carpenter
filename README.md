@@ -133,6 +133,6 @@ An example is also included in Carpenter-PreBuild-Example.cmd.
 
 ## Required Environment Variables ##
 
-BUILD_SOURCESIRECTORY
+BUILD_SOURCESDIRECTORY
 * Used by PesterTest XML output, will throw a warning during build if it does not exist
 * Used by PesterTest to set path for TF changeset - this path should be set to working directory e.g. C:\Dev\Carpenter\Main
