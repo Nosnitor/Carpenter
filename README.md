@@ -46,7 +46,7 @@ not change on a patch release. WidgetsApp v2 or WidgetsApp 2 may also be used.
 #### Build Version ####
 
 The build version defines the version of the build. This nomenclature identifies the exact information necessary
-to determin when the assemblies were built from source code. Each build process will generate a build identifier.
+to determine when the assemblies were built from source code. Each build process will generate a build identifier.
 This version uses SemVer v2.0 (http://semver.org).
 
 This build is used for release filenames, build-specific or automated documentation, etc. Local builds are defined as
