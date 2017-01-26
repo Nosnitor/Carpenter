@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<GenericTest name="GenericTest1" storage="e:\dev\carpenter\source\carpenter\assembly.common.tests\testfiles\generictest1.generictest" id="8869c519-d277-4733-b0d7-499b1a6684b0" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <Command filename="%COMSPEC%" arguments="/c SET" workingDirectory="%TestOutputDirectory%" />
-  <SummaryXmlFile path="%TestOutputDirectory%\&lt;Enter summary file name here&gt;" />
-</GenericTest>

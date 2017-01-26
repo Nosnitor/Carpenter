@@ -1,1 +1,0 @@
-libxml2-2.7.8.win32 - xmllint is used to verify XML in the project

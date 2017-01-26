@@ -1,3 +1,0 @@
-libxml2-2.7.8.win32
-iconv-1.9.2.win32
-zlib-1.2.5
