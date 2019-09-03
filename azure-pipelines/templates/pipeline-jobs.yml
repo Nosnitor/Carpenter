@@ -38,7 +38,7 @@ jobs:
 
   steps:
   - script: |
-      echo ##vso[task.setvariable variable=solutionName;isOutput=true]${{ parameters.solutionName }}
+      echo "##vso[task.setvariable variable=solutionName;isOutput=true]${{ parameters.solutionName }}"
     displayName: Configure pipeline variables
     name: configureVariables
 
@@ -56,6 +56,6 @@ jobs:
 
   steps:
   - script: |
-      echo SolutionName         : $(SolutionName)
-      echo SonarQube.ProjectKey : $(SonarQube.ProjectKey)
+      echo "SolutionName         : $(SolutionName)"
+      echo "SonarQube.ProjectKey : ${{ parameters.sonarQubeProjectKey }}"
     displayName: Display pipeline variables
