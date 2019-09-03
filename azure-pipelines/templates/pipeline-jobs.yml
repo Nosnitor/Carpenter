@@ -27,6 +27,7 @@
 
 parameters:
   solutionName: solution
+  sonarQubeProjectKey: ''
 
 jobs:
 - job: Prepare
@@ -55,6 +56,6 @@ jobs:
 
   steps:
   - script: |
-      echo SolutionName         : ${{ parameters.solutionName }}
+      echo SolutionName         : $(SolutionName)
       echo SonarQube.ProjectKey : $(SonarQube.ProjectKey)
     displayName: Display pipeline variables
