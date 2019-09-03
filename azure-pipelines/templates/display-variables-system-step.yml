@@ -1,0 +1,18 @@
+steps:
+- bash: |
+    echo "TF_BUILD                               : $TF_BUILD"
+    echo "System.Debug                           : $SYSTEM_DEBUG"
+    echo "System.CollectionId                    : $SYSTEM_COLLECTIONID"
+    echo "System.DefaultWorkingDirectory         : $SYSTEM_DEFAULTWORKINGDIRECTORY"
+    echo "System.DefinitionId                    : $SYSTEM_DEFINITIONID"
+    echo "System.HostType                        : $SYSTEM_HOSTTYPE"
+    echo "System.PullRequest.IsFork              : $SYSTEM_PULLREQUEST_ISFORK"
+    echo "System.PullRequest.PullRequestId       : $SYSTEM_PULLREQUEST_PULLREQUESTID"
+    echo "System.PullRequest.PullRequestNumber   : $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER"
+    echo "System.PullRequest.SourceBranch        : $SYSTEM_PULLREQUEST_SOURCEBRANCH"
+    echo "System.PullRequest.SourceRepositoryURI : $SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI"
+    echo "System.PullRequest.TargetBranch        : $SYSTEM_PULLREQUEST_TARGETBRANCH"
+    echo "System.TeamFoundationCollectionUri     : $SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"
+    echo "System.TeamProject                     : $SYSTEM_TEAMPROJECT"
+    echo "System.TeamProjectId                   : $SYSTEM_TEAMPROJECTID"
+displayName: Display system variables
