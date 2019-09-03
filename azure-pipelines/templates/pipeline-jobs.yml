@@ -31,23 +31,30 @@ parameters:
 jobs:
 - job: Prepare
   displayName: Prepare for build
+
+  pool:
+  vmImage: 'ubuntu-latest'
+
   steps:
   - script: |
       echo ##vso[task.setvariable variable=solutionName;isOutput=true]${{ parameters.solutionName }}
     displayName: Configure pipeline variables
     name: configureVariables
 
+
 - job: Build
+  displayName: Build test and analyze solution
+
   dependsOn: Prepare
+
   variables:
     SolutionName: $[ dependencies.Prepare.outputs['configureVariables.solutionName'] ]
-  displayName: Build and test $(SolutionName)
 
   pool:
     vmImage: 'ubuntu-latest'
 
   steps:
   - script: |
-      echo 'SolutionName : ${{ parameters.solutionName }}'
-      echo See https://aka.ms/yaml
-    displayName: 'Display agent variables'
+      echo SolutionName         : ${{ parameters.solutionName }}
+      echo SonarQube.ProjectKey : $(SonarQube.ProjectKey)
+    displayName: Display pipeline variables

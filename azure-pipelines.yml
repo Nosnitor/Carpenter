@@ -27,6 +27,7 @@
 
 variables:
     SolutionName: Nosnitor.Carpenter
+    "SonarQube.ProjectKey": '$(SolutionName)'
 
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
