@@ -33,7 +33,7 @@ jobs:
   displayName: Prepare for build
 
   pool:
-  vmImage: 'ubuntu-latest'
+    vmImage: 'ubuntu-latest'
 
   steps:
   - script: |
