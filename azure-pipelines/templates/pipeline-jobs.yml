@@ -25,15 +25,19 @@
 # Pipeline definition for Azure Pipelines.
 #
 
-variables:
-    SolutionName: Carpenter
-
-name: $(Date:yyyyMMdd)$(Rev:.r)
-
-trigger:
-- master
+parameters:
+  solutionName: solution
 
 jobs:
-- template: azure-pipelines/templates/pipeline-jobs.yml
-  parameters:
-#    solutionName: $(SolutionName)
+- job: Build
+  displayName: 'Build and test Project'
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - template 
+  - script: |
+      echo 'SolutionName : ${{ parameters.solutionName }}'
+      echo See https://aka.ms/yaml
+    displayName: 'Display agent variables'
