@@ -39,6 +39,7 @@ jobs:
   steps:
   - bash: |
       echo "##vso[task.setvariable variable=solutionName;isOutput=true]${{ parameters.solutionName }}"
+      echo "##vso[task.setvariable variable=SonarQube.ProjectKey;isOutput=true]${{ parameters.sonarQubeProjectKey }}"
     displayName: Configure pipeline variables
     name: configureVariables
 
@@ -49,32 +50,33 @@ jobs:
   dependsOn: Prepare
 
   variables:
-    SolutionName: $[ dependencies.Prepare.outputs['configureVariables.solutionName'] ]
+    SolutionName: $[ dependencies.Prepare.outputs['configureVariables.SolutionName'] ]
+    "SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.SonarQube.ProjectKey'] ]
 
   pool:
     vmImage: 'ubuntu-latest'
 
   steps:
   - bash: |
-      echo "Pipeline.Workspace                     : $(Pipeline.Workspace)"
-      echo "SolutionName                           : $(SolutionName)"
-      echo "SonarQube.ProjectKey                   : ${{ parameters.sonarQubeProjectKey }}"
+      echo "Pipeline.Workspace                     : $PIPELINE_WORKSPACE"
+      echo "SolutionName                           : $SOLUTION_NAME"
+      echo "SonarQube.ProjectKey                   : $SONARQUBE_PROJECTKEY"
     displayName: Display pipeline variables
 
   - bash: |
-      echo "TF_BUILD                               : $(TF_BUILD)"
-      echo "System.Debug                           : $(System.Debug)"
-      echo "System.CollectionId                    : $(System.CollectionId)"
-      echo "System.DefaultWorkingDirectory         : $(System.DefaultWorkingDirectory)"
-      echo "System.DefinitionId                    : $(System.DefinitionId)"
-      echo "System.HostType                        : $(System.HostType)"
-      echo "System.PullRequest.IsFork              : $(System.PullRequest.IsFork)"
-      echo "System.PullRequest.PullRequestId       : $(System.PullRequest.PullRequestId)"
-      echo "System.PullRequest.PullRequestNumber   : $(System.PullRequest.PullRequestNumber)"
-      echo "System.PullRequest.SourceBranch        : $(System.PullRequest.SourceBranch)"
-      echo "System.PullRequest.SourceRepositoryURI : $(System.PullRequest.SourceRepositoryURI)"
-      echo "System.PullRequest.TargetBranch        : $(System.PullRequest.TargetBranch)"
-      echo "System.TeamFoundationCollectionUri     : $(System.TeamFoundationCollectionUri)"
-      echo "System.TeamProject                     : $(System.TeamProject)"
-      echo "System.TeamProjectId                   : $(System.TeamProjectId)"
+      echo "TF_BUILD                               : $TF_BUILD"
+      echo "System.Debug                           : $SYSTEM_DEBUG"
+      echo "System.CollectionId                    : $SYSTEM_COLLECTIONID"
+      echo "System.DefaultWorkingDirectory         : $SYSTEM_DEFAULTWORKINGDIRECTORY"
+      echo "System.DefinitionId                    : $SYSTEM_DEFINITIONID"
+      echo "System.HostType                        : $SYSTEM_HOSTTYPE"
+      echo "System.PullRequest.IsFork              : $SYSTEM_PULLREQUEST_ISFORK"
+      echo "System.PullRequest.PullRequestId       : $SYSTEM_PULLREQUEST_PULLREQUESTID"
+      echo "System.PullRequest.PullRequestNumber   : $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER"
+      echo "System.PullRequest.SourceBranch        : $SYSTEM_PULLREQUEST_SOURCEBRANCH"
+      echo "System.PullRequest.SourceRepositoryURI : $SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI"
+      echo "System.PullRequest.TargetBranch        : $SYSTEM_PULLREQUEST_TARGETBRANCH"
+      echo "System.TeamFoundationCollectionUri     : $SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"
+      echo "System.TeamProject                     : $SYSTEM_TEAMPROJECT"
+      echo "System.TeamProjectId                   : $SYSTEM_TEAMPROJECTID"
     displayName: Display system variables
