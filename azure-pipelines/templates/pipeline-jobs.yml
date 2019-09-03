@@ -30,7 +30,7 @@ parameters:
 
 jobs:
 - job: Build
-  displayName: 'Build and test Project'
+  displayName: 'Build and test ${{ parameters.solutionName }}'
 
   pool:
     vmImage: 'ubuntu-latest'
