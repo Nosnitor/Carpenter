@@ -32,6 +32,7 @@ steps:
     echo "Build.BuildNumber                      : $BUILD_BUILDNUMBER"
     echo "Build.BuildUri                         : $BUILD_BUILDURI"
     echo "Build.BinariesDirectory                : $BUILD_BINARIESDIRECTORY"
+    echo "Build.Clean                            : $BUILD_CLEAN"
     echo "Build.DefinitionName                   : $BUILD_DEFINITIONNAME"
     echo "Build.DefinitionVersion                : $BUILD_DEFINITIONVERSION"
     echo "Build.QueuedBy                         : $BUILD_QUEUEDBY"
