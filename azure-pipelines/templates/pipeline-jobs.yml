@@ -37,7 +37,7 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
-  - script: |
+  - bash: |
       echo "##vso[task.setvariable variable=solutionName;isOutput=true]${{ parameters.solutionName }}"
     displayName: Configure pipeline variables
     name: configureVariables
@@ -55,7 +55,7 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
-  - script: |
+  - bash: |
       echo "SolutionName         : $(SolutionName)"
       echo "SonarQube.ProjectKey : ${{ parameters.sonarQubeProjectKey }}"
     displayName: Display pipeline variables
