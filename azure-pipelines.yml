@@ -26,7 +26,7 @@
 #
 
 variables:
-    SolutionName: Carpenter
+    SolutionName: Nosnitor.Carpenter
 
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
@@ -35,5 +35,5 @@ trigger:
 
 jobs:
 - template: azure-pipelines/templates/pipeline-jobs.yml
-#  parameters:
-#    solutionName: $(SolutionName)
+  parameters:
+    solutionName: $(SolutionName)
