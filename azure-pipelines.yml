@@ -37,5 +37,5 @@ trigger:
 jobs:
 - template: azure-pipelines/templates/pipeline-jobs.yml
   parameters:
-    solutionName: '$(SolutionName)'
-    sonarQubeProjectKey: '$(SonarQube.ProjectKey)'
+    solutionName: '$(Carpenter.SolutionName)'
+    sonarQubeProjectKey: '$(Carpenter.SonarQube.ProjectKey)'
