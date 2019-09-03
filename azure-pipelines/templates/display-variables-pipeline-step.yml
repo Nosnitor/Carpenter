@@ -3,4 +3,4 @@ steps:
     echo "Pipeline.Workspace                     : $PIPELINE_WORKSPACE"
     echo "SolutionName                           : $SOLUTIONNAME"
     echo "SonarQube.ProjectKey                   : $SONARQUBE_PROJECTKEY"
-displayName: Display pipeline variables
+  displayName: Display pipeline variables

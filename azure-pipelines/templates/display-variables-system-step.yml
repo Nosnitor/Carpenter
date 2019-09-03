@@ -15,4 +15,4 @@ steps:
     echo "System.TeamFoundationCollectionUri     : $SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"
     echo "System.TeamProject                     : $SYSTEM_TEAMPROJECT"
     echo "System.TeamProjectId                   : $SYSTEM_TEAMPROJECTID"
-displayName: Display system variables
+  displayName: Display system variables
