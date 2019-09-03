@@ -36,7 +36,6 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
-  - template 
   - script: |
       echo 'SolutionName : ${{ parameters.solutionName }}'
       echo See https://aka.ms/yaml
