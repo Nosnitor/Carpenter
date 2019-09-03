@@ -59,3 +59,4 @@ jobs:
   steps:
   - template: display-variables-pipeline-step.yml
   - template: display-variables-system-step.yml
+  - template: display-variables-build-step.yml
