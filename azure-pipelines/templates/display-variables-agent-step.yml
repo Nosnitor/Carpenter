@@ -22,45 +22,21 @@
 # SPDX-License-Identifier: MIT
 
 #
-# Pipeline definition for Azure Pipelines.
+# Displays agent variables.
 #
 
-parameters:
-  solutionName: solution
-  sonarQubeProjectKey: ''
-
-jobs:
-- job: Prepare
-  displayName: Prepare for build
-
-  pool:
-    vmImage: 'ubuntu-latest'
-
-  steps:
-  - bash: |
-      echo "##vso[task.setvariable variable=Carpenter.SolutionName;isOutput=true]${{ parameters.solutionName }}"
-      echo "##vso[task.setvariable variable=Carpenter.SonarQube.ProjectKey;isOutput=true]${{ parameters.sonarQubeProjectKey }}"
-    displayName: Configure pipeline variables
-    name: configureVariables
-
-
-- job: Build
-  displayName: Build test and analyze solution
-
-  dependsOn: Prepare
-
-  variables:
-    "Carpenter.SolutionName": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SolutionName'] ]
-    "Carpenter.SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SonarQube.ProjectKey'] ]
-
-  pool:
-    vmImage: 'ubuntu-latest'
-
-  steps:
-  - template: display-variables-build-step.yml
-  - template: display-variables-pipeline-step.yml
-  - template: display-variables-system-step.yml
-  - template: display-variables-agent-step.yml
-  # TODO: Only display when job is deployment job
-  - template: display-variables-deployment-step.yml
-  - template: display-variables-carpenter-step.yml
+steps:
+- bash: |
+    echo "Agent.BuildDirectory                   : $AGENT_BUILDDIRECTORY"
+    echo "Agent.HomeDirectory                    : $AGENT_HOMEDIRECTORY"
+    echo "Agent.Id                               : $AGENT_ID"
+    echo "Agent.JobName                          : $AGENT_JOBNAME"
+    echo "Agent.JobStatus                        : $AGENT_JOBSTATUS"
+    echo "Agent.MachineName                      : $AGENT_MACHINENAME"
+    echo "Agent.Name                             : $AGENT_NAME"
+    echo "Agent.OS                               : $AGENT_OS"
+    echo "Agent.OSArchitecture                   : $AGENT_OSARCHITECTURE"
+    echo "Agent.TempDirectory                    : $AGENT_TEMPDIRECTORY"
+    echo "Agent.ToolsDirectory                   : $AGENT_TOOLSDIRECTORY"
+    echo "Agent.WorkFolder                       : $AGENT_WORKFOLDER"
+  displayName: Display system variables

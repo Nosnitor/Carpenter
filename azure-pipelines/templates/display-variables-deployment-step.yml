@@ -22,45 +22,13 @@
 # SPDX-License-Identifier: MIT
 
 #
-# Pipeline definition for Azure Pipelines.
+# Displays deployment variables.
 #
 
-parameters:
-  solutionName: solution
-  sonarQubeProjectKey: ''
-
-jobs:
-- job: Prepare
-  displayName: Prepare for build
-
-  pool:
-    vmImage: 'ubuntu-latest'
-
-  steps:
-  - bash: |
-      echo "##vso[task.setvariable variable=Carpenter.SolutionName;isOutput=true]${{ parameters.solutionName }}"
-      echo "##vso[task.setvariable variable=Carpenter.SonarQube.ProjectKey;isOutput=true]${{ parameters.sonarQubeProjectKey }}"
-    displayName: Configure pipeline variables
-    name: configureVariables
-
-
-- job: Build
-  displayName: Build test and analyze solution
-
-  dependsOn: Prepare
-
-  variables:
-    "Carpenter.SolutionName": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SolutionName'] ]
-    "Carpenter.SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SonarQube.ProjectKey'] ]
-
-  pool:
-    vmImage: 'ubuntu-latest'
-
-  steps:
-  - template: display-variables-build-step.yml
-  - template: display-variables-pipeline-step.yml
-  - template: display-variables-system-step.yml
-  - template: display-variables-agent-step.yml
-  # TODO: Only display when job is deployment job
-  - template: display-variables-deployment-step.yml
-  - template: display-variables-carpenter-step.yml
+steps:
+- bash: |
+    echo "Environment.Name                       : $ENVIRONMENT_NAME"
+    echo "Environment.Id                         : $ENVIRONMENT_ID"
+    echo "Environment.ResourceName               : $ENVIRONMENT_RESOURCENAME"
+    echo "Environment.ResourceId                 : $ENVIRONMENT_RESOURCEID"
+  displayName: Display system variables
