@@ -29,8 +29,19 @@ parameters:
   solutionName: solution
 
 jobs:
+- job: Prepare
+  displayName: Prepare for build
+  steps:
+  - script: |
+      echo ##vso[task.setvariable variable=solutionName;isOutput=true]${{ parameters.solutionName }}
+    displayName: Configure pipeline variables
+    name: configureVariables
+
 - job: Build
-  displayName: 'Build and test ${{ parameters.solutionName }}'
+  dependsOn: Prepare
+  variables:
+    SolutionName: $[ dependencies.Prepare.outputs['configureVariables.solutionName'] ]
+  displayName: Build and test $(SolutionName)
 
   pool:
     vmImage: 'ubuntu-latest'
