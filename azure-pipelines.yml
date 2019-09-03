@@ -35,5 +35,5 @@ trigger:
 
 jobs:
 - template: azure-pipelines/templates/pipeline-jobs.yml
-  parameters:
+#  parameters:
 #    solutionName: $(SolutionName)
