@@ -31,4 +31,4 @@ steps:
     echo "Environment.Id                         : $ENVIRONMENT_ID"
     echo "Environment.ResourceName               : $ENVIRONMENT_RESOURCENAME"
     echo "Environment.ResourceId                 : $ENVIRONMENT_RESOURCEID"
-  displayName: Display system variables
+  displayName: Display deployment variables

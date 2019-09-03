@@ -39,4 +39,4 @@ steps:
     echo "Agent.TempDirectory                    : $AGENT_TEMPDIRECTORY"
     echo "Agent.ToolsDirectory                   : $AGENT_TOOLSDIRECTORY"
     echo "Agent.WorkFolder                       : $AGENT_WORKFOLDER"
-  displayName: Display system variables
+  displayName: Display agent variables

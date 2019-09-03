@@ -29,4 +29,4 @@ steps:
 - bash: |
     echo "Carpenter.SolutionName                 : $CARPENTER_SOLUTIONNAME"
     echo "Carpenter.SonarQube.ProjectKey         : $CARPENTER_SONARQUBE_PROJECTKEY"
-  displayName: Display pipeline variables
+  displayName: Display carpenter variables
