@@ -32,4 +32,4 @@ steps:
     echo "Build.TriggeredBy.BuildNumber          : $BUILD_TRIGGEREDBY_BUILDNUMBER"
     echo "Build.TriggeredBy.ProjectID            : $BUILD_TRIGGEREDBY_PROJECTID"
     echo "Build.TestResultsDirectory             : $BUILD_TESTRESULTSDIRECTORY"
-  displayName: Display system variables
+  displayName: Display build variables
