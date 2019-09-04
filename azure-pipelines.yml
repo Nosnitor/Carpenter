@@ -36,8 +36,10 @@ trigger:
 - master
 
 resources:
-- repo: self
-  submodules: true
+  repositories:
+  - repository: self
+    checkoutOptions:
+      submodules: true
 
 jobs:
 - template: Carpenter.AzurePipelinesYaml/templates/pipeline-jobs.yml
