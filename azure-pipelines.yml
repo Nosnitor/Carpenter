@@ -35,6 +35,10 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - master
 
+resources:
+- repo: self
+  submodules: true
+
 jobs:
 - template: Carpenter.AzurePipelinesYaml/templates/pipeline-jobs.yml
   parameters:
