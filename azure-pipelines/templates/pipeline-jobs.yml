@@ -54,13 +54,25 @@ jobs:
         VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$CARPENTER_VERSION_VERSIONFILE
         if [[ -f "$VERSIONFILEPATH" ]]; then
           echo "Using VERSION file $VERSIONFILEPATH"
-          VERSIONPREFIX=`cat $VERSIONFILEPATH`
-          # TODO: Read file
+          VERSIONPREFIXSTRING=`cat $VERSIONFILEPATH`
+          regex="(\d+\.)(\d+\.)(\d)"
+          if [[ $VERSIONPREFIXSTRING =~ $regex ]]; then
+            VERSIONPREFIX=$VERSIONPREFIXSTRING
+            VERSIONMAJOR="${BASH_REMATCH[1]}"
+            VERSIONMINOR="${BASH_REMATCH[2]}"
+            VERSIONPATCH="${BASH_REMATCH[3]}"
+          else
+            echo "##vso[task.logissue type=error;]VERSION file should only contain the Major.Minor.Patch elements of the version number."
+            echo "##vso[task.complete result=Failed;]VERSION file should only contain the Major.Minor.Patch elements of the version number."
+          fi
         else
           echo "##vso[task.logissue type=error;]Could not locate version file. File not found: $VERSIONFILEPATH"
           echo "##vso[task.complete result=Failed;]Could not locate version file."
         fi
       fi
+      echo "##vso[task.setvariable variable=Carpenter.Version.Major;isOutput=true]$VERSIONMAJOR"
+      echo "##vso[task.setvariable variable=Carpenter.Version.Minor;isOutput=true]$VERSIONMINOR"
+      echo "##vso[task.setvariable variable=Carpenter.Version.Patch;isOutput=true]$VERSIONPATCH"
       echo "##vso[task.setvariable variable=Carpenter.Version.Prefix;isOutput=true]$VERSIONPREFIX"
     displayName: Determine build number
     name: determineBuildNumber
@@ -75,6 +87,9 @@ jobs:
     "Carpenter.SolutionName": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SolutionName'] ]
     "Carpenter.SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SonarQube.ProjectKey'] ]
     "Carpenter.Version.VersionFile" : $[ dependencies.Prepare.outputs['configureVariables.Carpenter.Version.VersionFile'] ]
+    "Carpenter.Version.Major" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Minor'] ]
+    "Carpenter.Version.Minor" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Minor'] ]
+    "Carpenter.Version.Patch" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Patch'] ]
     "Carpenter.Version.Prefix" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Prefix'] ]
 
   pool:
