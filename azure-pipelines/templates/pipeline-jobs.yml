@@ -41,19 +41,20 @@ jobs:
   - bash: |
       echo "##vso[task.setvariable variable=Carpenter.SolutionName;isOutput=true]${{ parameters.solutionName }}"
       echo "##vso[task.setvariable variable=Carpenter.SonarQube.ProjectKey;isOutput=true]${{ parameters.sonarQubeProjectKey }}"
-      echo "##vso[task.setvariable variable=Carpenter.VersionFile;isOutput=true]${{ parameters.versionFile }}"
+      echo "##vso[task.setvariable variable=Carpenter.Version.VersionFile;isOutput=true]${{ parameters.versionFile }}"
     displayName: Configure pipeline variables
     name: configureVariables
   
   - bash: |
       # get version prefix from VERSION file
-      if [ -z "$CARPETNER_VERSIONFILE" ]; then
-        echo "##vso[task.logissue type=warning;]Carpenter.VersionFile (CARPENTER_VERSIONFILE) variable has not been defined. Using version 0.1.0."
+      if [ -z "$CARPETNER_VERSION_VERSIONFILE" ]; then
+        echo "##vso[task.logissue type=warning;]Carpenter.Version.VersionFile (CARPENTER_VERSION_VERSIONFILE) variable has not been defined. Using version 0.1.0."
         VERSIONPREFIX=0.1.0
       else
         VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$VERSIONFILE
         if [[ -f "$VERSIONFILEPATH" ]]; then
           echo "Using VERSION file $VERSIONFILEPATH"
+          VERSIONPREFIX=`cat $VERSIONFILEPATH`
           # TODO: Read file
         else
           echo "##vso[task.logissue type=error;]Could not locate version file. File not found: $VERSIONFILEPATH"
@@ -72,7 +73,7 @@ jobs:
   variables:
     "Carpenter.SolutionName": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SolutionName'] ]
     "Carpenter.SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SonarQube.ProjectKey'] ]
-    "Carpenter.VersionFile" : $[ dependencies.Prepare.outputs['configureVariables.Carpenter.VersionFile'] ]
+    "Carpenter.Version.VersionFile" : $[ dependencies.Prepare.outputs['configureVariables.Carpenter.Version.VersionFile'] ]
     "Carpenter.Version.Prefix" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Prefix'] ]
 
   pool:
