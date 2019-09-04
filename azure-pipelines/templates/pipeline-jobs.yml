@@ -45,12 +45,9 @@ jobs:
     displayName: Configure pipeline variables
     name: configureVariables
   
-  - bash:
+  - bash: ../scripts/get-buildnumber.sh'
     displayName: Determine build number
     name: determineBuildNumber
-    inputs:
-      targetType: 'filePath'
-      filePath: '$(Build.SourcesDirectory)/azure-pipelines/scripts/get-buildnumber.sh'
 
   - bash: |
       if [ ! -z "$CARPENTER_VERSION_VERSIONSUFFIX" ]; then
