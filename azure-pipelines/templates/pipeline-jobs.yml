@@ -55,7 +55,7 @@ jobs:
         if [[ -f "$VERSIONFILEPATH" ]]; then
           echo "Using VERSION file $VERSIONFILEPATH"
           VERSIONPREFIXSTRING=`cat $VERSIONFILEPATH`
-          regex="(\d+\.)(\d+\.)(\d)"
+          regex='^(\d+\.)(\d+\.)(\d)$'
           if [[ $VERSIONPREFIXSTRING =~ $regex ]]; then
             VERSIONPREFIX=$VERSIONPREFIXSTRING
             VERSIONMAJOR="${BASH_REMATCH[1]}"
