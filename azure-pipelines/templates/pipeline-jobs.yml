@@ -28,6 +28,7 @@
 parameters:
   solutionName: solution
   sonarQubeProjectKey: ''
+  versionFile: ''
 
 jobs:
 - job: Prepare
@@ -40,8 +41,25 @@ jobs:
   - bash: |
       echo "##vso[task.setvariable variable=Carpenter.SolutionName;isOutput=true]${{ parameters.solutionName }}"
       echo "##vso[task.setvariable variable=Carpenter.SonarQube.ProjectKey;isOutput=true]${{ parameters.sonarQubeProjectKey }}"
+      echo "##vso[task.setvariable variable=Carpenter.VersionFile;isOutput=true]${{ parameters.versionFile }}"
     displayName: Configure pipeline variables
     name: configureVariables
+  
+  - bash: |
+      # get version prefix from VERSION file
+      if [ -z "$CARPETNER_VERSIONFILE" ]; then
+        echo "##vso[task.logissue type=warning;]Carpenter.VersionFile (CARPENTER_VERSIONFILE) variable has not been defined. Continuing with version 0.1.0."
+      else
+        VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$VERSIONFILE
+        echo "Using VERSION file $VERSIONFILEPATH"
+        if [[ -f "$VERSIONFILEPATH"]]; then
+          # TODO: Read file
+        else
+          echo "##vso[task.logissue type=error;]Could not locate version file. File not found: $VERSIONFILEPATH"
+        fi
+      fi
+    displayName: Determine build number
+    name: determineBuildNumber
 
 
 - job: Build
@@ -52,6 +70,7 @@ jobs:
   variables:
     "Carpenter.SolutionName": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SolutionName'] ]
     "Carpenter.SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SonarQube.ProjectKey'] ]
+    "Carpenter.VersionFile" : $[ dependencies.Prepare.outputs['configureVariables.Carpenter.VersionFile'] ]
 
   pool:
     vmImage: 'ubuntu-latest'
