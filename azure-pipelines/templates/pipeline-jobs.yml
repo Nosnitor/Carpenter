@@ -45,7 +45,7 @@ jobs:
     displayName: Configure pipeline variables
     name: configureVariables
   
-  - bash: ../scripts/get-buildnumber.sh
+  - bash: '$(Build.SourcesDirectory)/azure-pipelines/scripts/get-buildnumber.sh'
     displayName: Determine build number
     name: determineBuildNumber
 
