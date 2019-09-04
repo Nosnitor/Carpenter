@@ -45,40 +45,25 @@ jobs:
     displayName: Configure pipeline variables
     name: configureVariables
   
-  - bash: |
-      # get version prefix from VERSION file
-      if [ -z "$CARPENTER_VERSION_VERSIONFILE" ]; then
-        echo "##vso[task.logissue type=warning;]Carpenter.Version.VersionFile (CARPENTER_VERSION_VERSIONFILE) variable has not been defined. Using version 0.1.0."
-        VERSIONPREFIX=0.1.0
-        VERSIONMAJOR=0
-        VERSIONMINOR=1
-        VERSIONPATCH=0
-      else
-        VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$CARPENTER_VERSION_VERSIONFILE
-        if [[ -f "$VERSIONFILEPATH" ]]; then
-          echo "Using VERSION file $VERSIONFILEPATH"
-          VERSIONPREFIXSTRING=`cat $VERSIONFILEPATH`
-          regex='^([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+)$'
-          if [[ $VERSIONPREFIXSTRING =~ $regex ]]; then
-            VERSIONPREFIX=$VERSIONPREFIXSTRING
-            VERSIONMAJOR="${BASH_REMATCH[1]}"
-            VERSIONMINOR="${BASH_REMATCH[2]}"
-            VERSIONPATCH="${BASH_REMATCH[3]}"
-          else
-            echo "##vso[task.logissue type=error;]VERSION file should only contain the Major.Minor.Patch elements of the version number."
-            echo "##vso[task.complete result=Failed;]VERSION file should only contain the Major.Minor.Patch elements of the version number."
-          fi
-        else
-          echo "##vso[task.logissue type=error;]Could not locate version file. File not found: $VERSIONFILEPATH"
-          echo "##vso[task.complete result=Failed;]Could not locate version file."
-        fi
-      fi
-      echo "##vso[task.setvariable variable=Carpenter.Version.Major;isOutput=true]$VERSIONMAJOR"
-      echo "##vso[task.setvariable variable=Carpenter.Version.Minor;isOutput=true]$VERSIONMINOR"
-      echo "##vso[task.setvariable variable=Carpenter.Version.Patch;isOutput=true]$VERSIONPATCH"
-      echo "##vso[task.setvariable variable=Carpenter.Version.Prefix;isOutput=true]$VERSIONPREFIX"
+  - bash:
     displayName: Determine build number
     name: determineBuildNumber
+    inputs:
+      targetType: 'filePath'
+      filePath: '$(Build.SourcesDirectory)/azure-pipelines/scripts/get-buildnumber.sh'
+
+  - bash: |
+      if [ ! -z "$CARPENTER_VERSION_VERSIONSUFFIX" ]; then
+        VERSIONSUFFIX="$CARPENTER_VERSION_VERSIONSUFFIX.$[ counter(variables['Carpenter.Version.PackageVersion']) ]"
+        VERSIONSUFFIXSTRING="-$VERSIONSUFFIX"
+      fi
+      VERSIONSTRING="$VERSIONMAJOR.$VERSIONMINOR.$VERSIONPATCH$VERSIONSUFFIXSTRING"
+      echo "##vso[task.setvariable variable=Carpenter.Version.VersionSuffix;isOutput=true]$VERSIONSUFFIX"
+      echo "##vso[task.setvariable variable=Carpenter.Version.PackageVersion;isOutput=true]$VERSIONSTRING"
+      echo '##vso[build.updatebuildnumber]$VERSIONSTRING'
+    displayName: Finalize build number
+    name: finalizeBuildNumber
+
 
 
 - job: Build
@@ -94,6 +79,7 @@ jobs:
     "Carpenter.Version.Minor" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Minor'] ]
     "Carpenter.Version.Patch" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Patch'] ]
     "Carpenter.Version.Prefix" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Prefix'] ]
+    "Carpenter.Version.Suffix" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Suffix'] ]
 
   pool:
     vmImage: 'ubuntu-latest'
