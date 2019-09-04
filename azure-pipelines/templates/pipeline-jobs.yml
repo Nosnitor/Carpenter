@@ -50,12 +50,15 @@ jobs:
       if [ -z "$CARPENTER_VERSION_VERSIONFILE" ]; then
         echo "##vso[task.logissue type=warning;]Carpenter.Version.VersionFile (CARPENTER_VERSION_VERSIONFILE) variable has not been defined. Using version 0.1.0."
         VERSIONPREFIX=0.1.0
+        VERSIONMAJOR=0
+        VERSIONMINOR=1
+        VERSIONPATCH=0
       else
         VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$CARPENTER_VERSION_VERSIONFILE
         if [[ -f "$VERSIONFILEPATH" ]]; then
           echo "Using VERSION file $VERSIONFILEPATH"
           VERSIONPREFIXSTRING=`cat $VERSIONFILEPATH`
-          regex='^(\d+\.)(\d+\.)(\d)$'
+          regex='^([[:digit:]]+\.)([[:digit:]]+\.)([[:digit:]])$'
           if [[ $VERSIONPREFIXSTRING =~ $regex ]]; then
             VERSIONPREFIX=$VERSIONPREFIXSTRING
             VERSIONMAJOR="${BASH_REMATCH[1]}"
