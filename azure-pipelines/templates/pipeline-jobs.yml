@@ -53,11 +53,12 @@ jobs:
       filePath: '$(Build.SourcesDirectory)/azure-pipelines/scripts/get-buildnumber.sh'
 
   - bash: |
+      echo $CARPENTER_VERSION_VERSIONSUFFIX
       if [ ! -z "$CARPENTER_VERSION_VERSIONSUFFIX" ]; then
         VERSIONSUFFIX="$CARPENTER_VERSION_VERSIONSUFFIX.$[ counter(variables['Carpenter.Version.PackageVersion']) ]"
         VERSIONSUFFIXSTRING="-$VERSIONSUFFIX"
       fi
-      VERSIONSTRING="$VERSIONMAJOR.$VERSIONMINOR.$VERSIONPATCH$VERSIONSUFFIXSTRING"
+      VERSIONSTRING="$CARPENTER_VERSION_MAJOR.$CARPENTER_VERSION_MINOR.$CARPENTER_VERSION_PATCH$VERSIONSUFFIXSTRING"
       echo "##vso[task.setvariable variable=Carpenter.Version.VersionSuffix;isOutput=true]$VERSIONSUFFIX"
       echo "##vso[task.setvariable variable=Carpenter.Version.PackageVersion;isOutput=true]$VERSIONSTRING"
       echo "##vso[build.updatebuildnumber]$VERSIONSTRING"
