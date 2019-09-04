@@ -28,6 +28,7 @@
 variables:
     "Carpenter.SolutionName": Nosnitor.Carpenter
     "Carpenter.SonarQube.ProjectKey": '$(SolutionName)'
+    "Carpenter.Version.VersionFile": VERSION
 
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
@@ -39,3 +40,4 @@ jobs:
   parameters:
     solutionName: '$(Carpenter.SolutionName)'
     sonarQubeProjectKey: '$(Carpenter.SonarQube.ProjectKey)'
+    versionFile: '$(Carpenter.Version.VersionFile)'

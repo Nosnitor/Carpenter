@@ -48,7 +48,7 @@ jobs:
   - bash: |
       # get version prefix from VERSION file
       if [ -z "$CARPETNER_VERSIONFILE" ]; then
-        echo "##vso[task.logissue type=warning;]Carpenter.VersionFile (CARPENTER_VERSIONFILE) variable has not been defined. Continuing with version 0.1.0."
+        echo "##vso[task.logissue type=warning;]Carpenter.VersionFile (CARPENTER_VERSIONFILE) variable has not been defined. Using version 0.1.0."
         VERSIONPREFIX=0.1.0
       else
         VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$VERSIONFILE
@@ -73,6 +73,7 @@ jobs:
     "Carpenter.SolutionName": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SolutionName'] ]
     "Carpenter.SonarQube.ProjectKey": $[ dependencies.Prepare.outputs['configureVariables.Carpenter.SonarQube.ProjectKey'] ]
     "Carpenter.VersionFile" : $[ dependencies.Prepare.outputs['configureVariables.Carpenter.VersionFile'] ]
+    "Carpenter.Version.Prefix" : $[ dependencies.Prepare.outputs['determineBuildNumber.Carpenter.Version.Prefix'] ]
 
   pool:
     vmImage: 'ubuntu-latest'
