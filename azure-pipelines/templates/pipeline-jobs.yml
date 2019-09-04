@@ -52,8 +52,8 @@ jobs:
         VERSIONPREFIX=0.1.0
       else
         VERSIONFILEPATH=$BUILD_SOURCESDIRECTORY/$VERSIONFILE
-        echo "Using VERSION file $VERSIONFILEPATH"
         if [[ -f "$VERSIONFILEPATH" ]]; then
+          echo "Using VERSION file $VERSIONFILEPATH"
           # TODO: Read file
         else
           echo "##vso[task.logissue type=error;]Could not locate version file. File not found: $VERSIONFILEPATH"
