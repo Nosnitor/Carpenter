@@ -44,7 +44,7 @@ resources:
   - repository: carpenterYaml
     type: github
     name: Nosnitor/Carpenter.AzurePipelinesYaml
-
+    endpoint: Nosnitor
 jobs:
 - template: templates/pipeline-jobs.yml@carpenterYaml
   parameters:
