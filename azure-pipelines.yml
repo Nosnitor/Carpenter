@@ -41,8 +41,12 @@ resources:
     checkoutOptions:
       submodules: true
 
+  - repository: carpenterYaml
+    type: github
+    name: Nosnitor/Carpenter.AzurePipelinesYaml
+
 jobs:
-- template: Carpenter.AzurePipelinesYaml/templates/pipeline-jobs.yml
+- template: templates/pipeline-jobs.yml@carpenterYaml
   parameters:
     solutionName: '$(Carpenter.SolutionName)'
     sonarQubeProjectKey: '$(Carpenter.SonarQube.ProjectKey)'
