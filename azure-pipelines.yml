@@ -47,7 +47,7 @@ resources:
     endpoint: Nosnitor
 
 jobs:
-- template: templates/pipeline-jobs.yml@carpenterAzurePipelines
+- template: templates/prepare-build.yml@carpenterAzurePipelines
   parameters:
     solutionName: '$(Carpenter.SolutionName)'
     sonarQubeProjectKey: '$(Carpenter.SonarQube.ProjectKey)'
