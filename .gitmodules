@@ -1,0 +1,4 @@
+[submodule "build/Carpenter.AzurePipelines"]
+	path = build/Carpenter.AzurePipelines
+	url = https://github.com/Nosnitor/Carpenter.AzurePipelines
+	branch = master
