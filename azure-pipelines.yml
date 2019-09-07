@@ -46,9 +46,10 @@ resources:
     name: Nosnitor/Carpenter.AzurePipelines
     endpoint: Nosnitor
 
-jobs:
-- template: templates/prepare-build.yml@carpenterAzurePipelines
+stages:
+- template: templates/stage/carpenter-default.yml@carpenterAzurePipelines
   parameters:
     solutionName: '$(Carpenter.SolutionName)'
     sonarQubeProjectKey: '$(Carpenter.SonarQube.ProjectKey)'
     versionFile: '$(Carpenter.Version.VersionFile)'
+    vmImage: 'ubuntu-latest'
