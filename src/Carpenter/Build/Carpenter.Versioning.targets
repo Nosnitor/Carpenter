@@ -1,0 +1,40 @@
+﻿<Project>
+  <!-- Determine developer version number -->
+  <Target Name="CarpenterEvaluateVersion" BeforeTargets="GenerateTargetFrameworkMonikerAttribute">
+    <PropertyGroup Condition=" '$(VersionSuffix)' == 'dev'">
+      <CarpenterEvaluateVersion>true</CarpenterEvaluateVersion>
+    </PropertyGroup>      
+  </Target>
+  
+  <Target Name="CarpenterDetermineVersionFile" AfterTargets="CarpenterEvaluateVersion" Condition=" '$(CarpenterEvaluateVersion)' == 'true' ">
+    <!-- If CarpenterVersionFile has not been defined, look in project and solution directories -->
+    <PropertyGroup Condition=" '$(CarpenterVersionFile)' == '' ">
+      <CarpenterVersionFile Condition=" Exists('$(SolutionDir)\VERSION') ">$(SolutionDir)\VERSION</CarpenterVersionFile>
+      <CarpenterVersionFile Condition=" Exists('$(MSBuildProjectDirectory)\VERSION') ">$(MSBuildProjectDirectory)\VERSION</CarpenterVersionFile>
+    </PropertyGroup>
+    <Warning Condition=" '$(CarpenterVersionFile)' == '' " Text="Could not determine VERSION file. Carpenter did not locate a VERSION file in the project or solution directories. If the file exists outside of these directories, define a custom path using the CarpenterVersionFile property." />
+  </Target>
+  
+  <Target Name="CarpenterEvaluateVersionFile" AfterTargets="CarpenterDetermineVersionFile" Condition=" '$(CarpenterVersionFile)' != '' ">
+    <PropertyGroup>
+      <CarpenterVersionFullVersionPath>$([System.IO.Path]::GetFullPath('$(CarpenterVersionFile)'))</CarpenterVersionFullVersionPath>
+    </PropertyGroup>
+    <Error Condition="!Exists($(CarpenterVersionFullVersionPath))" Text="Could not locate VERSION file. File not found: $(CarpenterVersionFullVersionPath)"/>
+    <Message Text="Using file: $(CarpenterVersionFullVersionPath)" />    
+    <ReadLinesFromFile File="$(CarpenterVersionFullVersionPath)">
+      <Output TaskParameter="Lines" PropertyName="CarpenterVersionFromFile" />
+    </ReadLinesFromFile>
+    <Error Condition=" !$([System.Text.RegularExpressions.Regex]::IsMatch('$(CarpenterVersionFromFile)', '^(\d+)\.(\d+)\.(\d+)$')) " Text="VERSION file should contain only the Major.Minor.Patch elements of the version number (e.g. 1.2.3). Version File: $(CarpenterVersionFullVersionPath)" />
+    <PropertyGroup>
+      <VersionPrefix>$(CarpenterVersionFromFile)</VersionPrefix>
+      <VersionSuffix>dev.$([System.DateTime]::UtcNow.ToString(yyyyMMddTHHmmss))</VersionSuffix>
+      <VersionMetadata>+$(COMPUTERNAME).$(USERNAME)</VersionMetadata>
+      <PackageVersion Condition="'$(VersionSuffix)' == ''">$(VersionPrefix)</PackageVersion>
+      <PackageVersion Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</PackageVersion>
+      <Version>$(PackageVersion)$(VersionMetadata)</Version>
+      <CarpenterVersionFullVersionString>$(Version)</CarpenterVersionFullVersionString>
+    </PropertyGroup>
+    <Message Text="Version: $(CarpenterVersionFullVersionString)" />
+  </Target>
+
+</Project>
