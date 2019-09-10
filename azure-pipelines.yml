@@ -43,7 +43,7 @@ variables:
 
 # Default name for the build, prior to build versioning
 # $(Build.BuildId) is the default value used when YAML cannot be parsed
-name: $(Date:yyyyMMdd)$(Rev:.r)
+name: $(Build.BuildId)
 
 trigger:
   batch: true
