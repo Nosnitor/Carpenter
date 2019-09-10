@@ -36,7 +36,7 @@ variables:
     "Carpenter.SonarCloud.Organization": 'nosnitor'
 
     # The Project Key for this project in SonarCloud.
-    "Carpenter.SonarCloud.ProjectKey": 'Nosnitor_Carpenter.AzurePipelines'
+    "Carpenter.SonarCloud.ProjectKey": 'Nosnitor_Carpenter'
 
     # The name of the Azure DevOps service connection.
     "Carpenter.SonarCloud.ServiceConnection": 'SonarCloudAnalysis1'
