@@ -26,14 +26,30 @@
 #
 
 variables:
-    "Carpenter.SolutionName": Nosnitor.Carpenter
-    "Carpenter.SonarQube.ProjectKey": '$(Carpenter.SolutionName)'
-    "Carpenter.Version.VersionFile": VERSION
+    # The VM Image to use for build steps.
+    "Carpenter.Build.VMImage": "ubuntu-latest"
 
+    # The name of the solution, as used in the Visual Studio .sln file.
+    "Carpenter.SolutionName": 'Carpenter'
+
+    # The Organization this project is under in SonarCloud.
+    "Carpenter.SonarCloud.Organization": 'nosnitor'
+
+    # The Project Key for this project in SonarCloud.
+    "Carpenter.SonarCloud.ProjectKey": 'Nosnitor_Carpenter.AzurePipelines'
+
+    # The name of the Azure DevOps service connection.
+    "Carpenter.SonarCloud.ServiceConnection": 'SonarCloudAnalysis1'
+
+# Default name for the build, prior to build versioning
+# $(Build.BuildId) is the default value used when YAML cannot be parsed
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+    - master
 
 resources:
   repositories:
@@ -50,6 +66,7 @@ stages:
 - template: templates/stage/carpenter-default.yml@carpenterAzurePipelines
   parameters:
     solutionName: '$(Carpenter.SolutionName)'
-    sonarQubeProjectKey: '$(Carpenter.SonarQube.ProjectKey)'
-    versionFile: '$(Carpenter.Version.VersionFile)'
+    sonarCloudOrganization: '$(Carpenter.SonarCloud.Organization)'
+    sonarCloudProjectKey: '$(Carpenter.SonarCloud.ProjectKey)'
+    sonarCloudServiceConnection: '$(Carpenter.SonarCloud.ServiceConnection)'
     vmImage: 'ubuntu-latest'
