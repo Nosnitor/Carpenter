@@ -1,5 +1,7 @@
 ﻿/*
-    Carpenter - A cross-platform dotnet (.NET) build process helper.
+    Carpenter
+    A cross-platform dotnet (.NET) build process helper.
+
     Copyright © 2015-2019 Nosnitor Corporation, All rights reserved.    
 
     Permission is hereby granted, free of charge, to any person obtaining a copy

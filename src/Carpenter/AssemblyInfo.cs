@@ -1,8 +1,8 @@
-/*
+﻿/*
     Carpenter
     A cross-platform dotnet (.NET) build process helper.
 
-    Copyright � 2015-2019 Nosnitor Corporation, All rights reserved.
+    Copyright © 2015-2019 Nosnitor Corporation, All rights reserved.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -24,27 +24,11 @@
 */
 // SPDX-License-Identifier: MIT
 
-using Nosnitor.Carpenter;
-using Shouldly;
-using Xunit;
-using Xunit.Categories;
+using System;
+using System.Runtime.InteropServices;
 
-[assembly: AssemblyTrait("Category", "UnitTest")]
+// This assembly is not visible to COM clients.
+[assembly: ComVisible(false)]
 
-namespace Carpenter.ProgramTests
-{
-    /// <summary>
-    /// Generates code coverage for the project.
-    /// </summary>
-    /// <remarks>
-    /// This can be removed if this assembly implements actual functionality.
-    /// </remarks>
-    public class IsLoaded
-    {
-        [Fact]
-        public void ReturnsTrue()
-        {
-            Program.IsLoaded.ShouldBeTrue();
-        }
-    }
-}
+// This assembly is CLS Compliant.
+[assembly: CLSCompliant(true)]
