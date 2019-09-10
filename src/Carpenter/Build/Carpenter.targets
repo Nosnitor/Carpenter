@@ -28,7 +28,10 @@
     <PropertyGroup>
       <VersionPrefix>$(CarpenterVersionFromFile)</VersionPrefix>
       <VersionSuffix>dev.$([System.DateTime]::UtcNow.ToString(yyyyMMddTHHmmss))</VersionSuffix>
-      <VersionMetadata>+$(COMPUTERNAME).$(USERNAME)</VersionMetadata>
+      <VersionMetadata Condition=" '$(COMPUTERNAME)' != '' OR '$(USERNAME)' != ''">+</VersionMetadata>
+      <VersionMetadata Condition=" '$(COMPUTERNAME)' != ''">$(VersionMetaData)$(COMPUTERNAME)</VersionMetadata>
+      <VersionMetadata Condition=" '$(COMPUTERNAME)' != '' AND '$(USERNAME)' != ''">$(VersionMetaData).</VersionMetadata>
+      <VersionMetadata Condition=" '$(USERNAME)' != ''">$(VersionMetaData)$(USERNAME)</VersionMetadata>
       <PackageVersion Condition="'$(VersionSuffix)' == ''">$(VersionPrefix)</PackageVersion>
       <PackageVersion Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</PackageVersion>
       <Version>$(PackageVersion)$(VersionMetadata)</Version>
