@@ -32,36 +32,55 @@
   </Target>
   
   <!-- VERSION file contains version information -->
-  <Target Name="CarpenterDetermineVersionFile" AfterTargets="CarpenterEvaluateVersion" Condition=" '$(CarpenterEvaluateVersion)' == 'true' ">
+  <Target Name="CarpenterDetermineVersionFile"
+          AfterTargets="CarpenterEvaluateVersion"
+          Condition=" '$(CarpenterEvaluateVersion)' == 'true' ">
     <!-- If CarpenterVersionFile has not been defined, look in project and solution directories -->
     <PropertyGroup Condition=" '$(CarpenterVersionFile)' == '' ">
-      <CarpenterVersionFile Condition=" Exists('$(SolutionDir)\VERSION') ">$(SolutionDir)\VERSION</CarpenterVersionFile>
-      <CarpenterVersionFile Condition=" Exists('$(MSBuildProjectDirectory)\VERSION') ">$(MSBuildProjectDirectory)\VERSION</CarpenterVersionFile>
+      <CarpenterVersionFile 
+        Condition=" Exists('$(SolutionDir)\VERSION') "
+        >$(SolutionDir)\VERSION</CarpenterVersionFile>
+      <CarpenterVersionFile 
+        Condition=" Exists('$(MSBuildProjectDirectory)\VERSION') "
+        >$(MSBuildProjectDirectory)\VERSION</CarpenterVersionFile>
     </PropertyGroup>
     <!-- If CarpenterVersionFile still has not been defined, display build warning -->
-    <Warning Condition=" '$(CarpenterVersionFile)' == '' " Text="Could not determine VERSION file. Carpenter did not locate a VERSION file in the project or solution directories. If the file exists outside of these directories, define a custom path using the CarpenterVersionFile property." />
+    <Warning 
+      Condition=" '$(CarpenterVersionFile)' == '' " 
+      Text="Could not determine VERSION file. Carpenter did not locate a VERSION file in the project or solution
+      directories. If the file exists outside of these directories, define a custom path using the CarpenterVersionFile
+      property." />
   </Target>
   
-  <Target Name="CarpenterEvaluateVersionFile" AfterTargets="CarpenterDetermineVersionFile" Condition=" '$(CarpenterVersionFile)' != '' ">
+  <Target Name="CarpenterEvaluateVersionFile"
+          AfterTargets="CarpenterDetermineVersionFile"
+          Condition=" '$(CarpenterVersionFile)' != '' ">
     <PropertyGroup>
       <!-- The full path to the VERSION file -->
-      <CarpenterVersionFullVersionPath>$([System.IO.Path]::GetFullPath('$(CarpenterVersionFile)'))</CarpenterVersionFullVersionPath>
+      <CarpenterVersionFullVersionPath
+        >$([System.IO.Path]::GetFullPath('$(CarpenterVersionFile)'))</CarpenterVersionFullVersionPath>
     </PropertyGroup>
-    <Error Condition="!Exists($(CarpenterVersionFullVersionPath))" Text="Could not locate VERSION file. File not found: $(CarpenterVersionFullVersionPath)"/>
+    <Error Condition="!Exists($(CarpenterVersionFullVersionPath))"
+           Text="Could not locate VERSION file. File not found: $(CarpenterVersionFullVersionPath)"/>
     <Message Text="Using file: $(CarpenterVersionFullVersionPath)" />    
     <!-- Read the VERSION File -->
     <ReadLinesFromFile File="$(CarpenterVersionFullVersionPath)">
       <Output TaskParameter="Lines" PropertyName="CarpenterVersionFromFile" />
     </ReadLinesFromFile>
     <!-- Validate version using Regex -->
-    <Error Condition=" !$([System.Text.RegularExpressions.Regex]::IsMatch('$(CarpenterVersionFromFile)', '^(\d+)\.(\d+)\.(\d+)$')) " Text="VERSION file should contain only the Major.Minor.Patch elements of the version number (e.g. 1.2.3). Version File: $(CarpenterVersionFullVersionPath)" />
+    <Error 
+      Condition=" !$([System.Text.RegularExpressions.Regex]::IsMatch('$(CarpenterVersionFromFile)',
+      '^(\d+)\.(\d+)\.(\d+)$')) "
+      Text="VERSION file should contain only the Major.Minor.Patch elements of the version number (e.g. 1.2.3).
+      Version File: $(CarpenterVersionFullVersionPath)" />
     <!-- Populate version properties -->
     <PropertyGroup>
       <VersionPrefix>$(CarpenterVersionFromFile)</VersionPrefix>
       <VersionSuffix>dev.$([System.DateTime]::UtcNow.ToString(yyyyMMddTHHmmss))</VersionSuffix>
       <VersionMetadata Condition=" '$(COMPUTERNAME)' != '' OR '$(USERNAME)' != ''">+</VersionMetadata>
       <VersionMetadata Condition=" '$(COMPUTERNAME)' != ''">$(VersionMetaData)$(COMPUTERNAME)</VersionMetadata>
-      <VersionMetadata Condition=" '$(COMPUTERNAME)' != '' AND '$(USERNAME)' != ''">$(VersionMetaData).</VersionMetadata>
+      <VersionMetadata
+        Condition=" '$(COMPUTERNAME)' != '' AND '$(USERNAME)' != ''">$(VersionMetaData).</VersionMetadata>
       <VersionMetadata Condition=" '$(USERNAME)' != ''">$(VersionMetaData)$(USERNAME)</VersionMetadata>
       <PackageVersion Condition="'$(VersionSuffix)' == ''">$(VersionPrefix)</PackageVersion>
       <PackageVersion Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</PackageVersion>
