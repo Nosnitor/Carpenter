@@ -3,6 +3,9 @@
 [Nosnitor Corporation](https://www.rcsit.com)
 
 [![Build Status](https://dev.azure.com/nosnitor/Carpenter/_apis/build/status/Nosnitor.Carpenter?branchName=master)](https://dev.azure.com/nosnitor/Carpenter/_build/latest?definitionId=60&branchName=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Nosnitor_Carpenter&metric=alert_status)](https://sonarcloud.io/dashboard?id=Nosnitor_Carpenter)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Nosnitor_Carpenter&metric=coverage)](https://sonarcloud.io/dashboard?id=Nosnitor_Carpenter)
+
 
 # Introduction
 
