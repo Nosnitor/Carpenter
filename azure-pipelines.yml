@@ -53,6 +53,12 @@ trigger:
     include:
     - master
 
+pr:
+  autoCancel: true
+  branches:
+    include:
+    - master
+
 resources:
   repositories:
   - repository: self
