@@ -27,3 +27,7 @@ that are created.
 
 Developer build versioning is automatically applied to projects that have referenced Carpenter
 and that have the value ```dev``` for the project VersionSuffix.
+
+# Development
+
+Commits are introduced to master branch via pull request.
