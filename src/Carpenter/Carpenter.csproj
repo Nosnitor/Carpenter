@@ -2,12 +2,32 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Nosnitor.Carpenter</AssemblyName>
+    <RootNamespace>Nosnitor.Carpenter</RootNamespace>
+    <PackageId>Carpenter</PackageId>
+    <Title>Carpenter</Title>
+    <AssemblyTitle>Carpenter Common Library</AssemblyTitle>
+    <Description>A cross-platform dotnet (.NET) build process helper.</Description>
+    <Product>Carpenter</Product>
+    <Copyright>Copyright © 2015-2019 Nosnitor Corporation</Copyright>
     <VersionSuffix>dev</VersionSuffix>
+    <Company>Nosnitor Corporation</Company>
+    <PackageIcon>Carpenter-Icon_128x128.png</PackageIcon>
+    <PackageIconUrl>https://raw.githubusercontent.com/Nosnitor/Carpenter/master/media/Carpenter-Icon_128x128.png</PackageIconUrl>
+    <Authors>Jeff Block</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Nosnitor/Carpenter</PackageProjectUrl>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Carpenter.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
 
   <ItemGroup>
+    <None Include="..\..\media\Carpenter-Icon_128x128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <Content Include="Build\Carpenter.targets">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <PackagePath>build/</PackagePath>

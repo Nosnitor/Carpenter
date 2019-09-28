@@ -76,7 +76,7 @@
     <!-- Populate version properties -->
     <PropertyGroup>
       <VersionPrefix>$(CarpenterVersionFromFile)</VersionPrefix>
-      <VersionSuffix>dev.$([System.DateTime]::UtcNow.ToString(yyyyMMddTHHmmss))</VersionSuffix>
+      <VersionSuffix>dev.$([System.DateTime]::UtcNow.ToString(yyyyMMdd-HHmmss-fff))</VersionSuffix>
       <VersionMetadata Condition=" '$(COMPUTERNAME)' != '' OR '$(USERNAME)' != ''">+</VersionMetadata>
       <VersionMetadata Condition=" '$(COMPUTERNAME)' != ''">$(VersionMetaData)$(COMPUTERNAME)</VersionMetadata>
       <VersionMetadata
