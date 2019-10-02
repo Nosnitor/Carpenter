@@ -22,13 +22,19 @@ Carpenter provides the following functionality:
 As part of the project build, consistent versioning is applied to the binaries and packages
 that are created.
 
-| Build type | Version example | Description
-|:--|:--|:--|
-| Developer build | 1.2.3-dev.20190907-133442-346+fred-pc.fred | A developers build of v1.2.3, built 09/07/2019 13:34:42.346 on fred-pc by fred.
+#### Developer Build Version
+
+A developers build of v1.2.3, built 09/07/2019 13:34:42.346 on machine fred-pc by user fred.
+
+Example: 1.2.3-dev.20190907-133442-346+fred-pc.fred
+
+#### Using Developer Build Versioning
 
 Developer build versioning is automatically applied to projects that have referenced Carpenter
 and that have the value ```dev``` for the project VersionSuffix.
 
 # Development
 
-Commits are introduced to master branch via pull request.
+For details on development, please see the [Carpenter development wiki](https://dev.azure.com/nosnitor/Carpenter/_wiki/wikis/Carpenter.wiki).
+
+Please also take note of the Carpenter [Code of Conduct](CODE_OF_CONDUCT.md) and [Contributing guidelines](CONTRIBUTING.md).
