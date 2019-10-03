@@ -6,7 +6,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Nosnitor_Carpenter&metric=alert_status)](https://sonarcloud.io/dashboard?id=Nosnitor_Carpenter)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Nosnitor_Carpenter&metric=coverage)](https://sonarcloud.io/dashboard?id=Nosnitor_Carpenter)
 ![Deployment](https://vsrm.dev.azure.com/nosnitor/_apis/public/Release/badge/7e342f2c-9b69-45df-8ef7-b8ad9e3388c5/2/10)
-
+[![Carpenter package at NuGet.org](https://feeds.dev.azure.com/nosnitor/_apis/public/Packaging/Feeds/ce90d72e-2e21-479e-a251-735363b85cb7/Packages/c0d5ac68-63be-4053-986a-dbbe2bd73657/Badge)](https://www.nuget.org/packages/Carpenter/)
 
 # Introduction
 
