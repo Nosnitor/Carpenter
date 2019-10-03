@@ -27,4 +27,16 @@
     <ProjectReference Include="..\..\src\Carpenter\Carpenter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Schemas\Microsoft.Build.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\MSBuild\Microsoft.Build.Commontypes.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\MSBuild\Microsoft.Build.Core.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

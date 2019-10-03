@@ -47,7 +47,7 @@ namespace Carpenter.TargetsFiles
         /// <summary>
         /// The path to the xml schema.
         /// </summary>
-        private const string ruleSetSchema = "Schemas/XMLSchema.xsd";
+        private const string ruleSetSchema = "Schemas/Microsoft.Build.xsd";
 
         /// <summary>
         /// Defines the valid rulesets.
@@ -77,10 +77,26 @@ namespace Carpenter.TargetsFiles
         public void TheTargetsFileIsValidXml(string fileName)
         {
             XmlDocument xml = new XmlDocument() { XmlResolver = null };
-            XmlReaderSettings settings = new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse };
+            XmlReaderSettings settings = new XmlReaderSettings() { XmlResolver = null };
             using (XmlReader reader = XmlReader.Create($"{relativePath}{fileName}", settings))
             {
                 xml.Load(reader);
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(ValidTargetsFiles))]
+        public void TheTargetsFileIsValidMsBuild(string fileName)
+        {
+            XmlDocument xml = new XmlDocument() { XmlResolver = null };
+            XmlReaderSettings settings = new XmlReaderSettings() { XmlResolver = null };
+            using (XmlReader reader = XmlReader.Create($"{relativePath}{fileName}", settings))
+            {
+                xml.Load(reader);
+
+                xml.Schemas.Add(null, ruleSetSchema);
+
+                xml.Validate(null);
             }
         }
     }
