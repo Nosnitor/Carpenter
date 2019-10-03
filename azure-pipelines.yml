@@ -52,12 +52,14 @@ trigger:
   branches:
     include:
     - master
+    - release/*
 
 pr:
   autoCancel: true
   branches:
     include:
     - master
+    - release/*
 
 resources:
   repositories:
