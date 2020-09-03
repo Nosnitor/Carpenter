@@ -47,9 +47,7 @@
     <!-- If CarpenterVersionFile still has not been defined, display build warning -->
     <Warning 
       Condition=" '$(CarpenterVersionFile)' == '' " 
-      Text="Could not determine VERSION file. Carpenter did not locate a VERSION file in the project or solution
-      directories. If the file exists outside of these directories, define a custom path using the CarpenterVersionFile
-      property." />
+      Text="Could not determine VERSION file. Carpenter did not locate a VERSION file in the project or solution directories. If the file exists outside of these directories, define a custom path using the CarpenterVersionFile property." />
   </Target>
   
   <Target Name="CarpenterEvaluateVersionFile"
@@ -71,8 +69,7 @@
     <Error 
       Condition=" !$([System.Text.RegularExpressions.Regex]::IsMatch('$(CarpenterVersionFromFile)',
       '^(\d+)\.(\d+)\.(\d+)$')) "
-      Text="VERSION file should contain only the Major.Minor.Patch elements of the version number (e.g. 1.2.3).
-      Version File: $(CarpenterVersionFullVersionPath)" />
+      Text="VERSION file should contain only the Major.Minor.Patch elements of the version number (e.g. 1.2.3). Version File: $(CarpenterVersionFullVersionPath)" />
     <!-- Populate version properties -->
     <PropertyGroup>
       <VersionPrefix>$(CarpenterVersionFromFile)</VersionPrefix>
